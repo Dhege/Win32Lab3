@@ -1,0 +1,22 @@
+ HANDLE newstdin,newstdout,read_stdout,write_stdin;
+    STARTUPINFO si1 = {0};
+    PROCESS_INFORMATION pi1 = {0};
+
+    CreatePipe(&ph_r,&ph_w,&sa,0);//PHANDLE,PHANDLE,nSIZE,DWORD
+    si1.hStdInput = ph_r;
+    si1.hStdError = GetStdHandle (STD_ERROR_HANDLE);
+    si1.hStdOutput = ph_w;
+    si1.dwFlags = STARTF_USESTDHANDLES;
+    CloseHandle(ph_r);
+
+    ChildProcess(process1,"C:\\",si1,pi1);
+
+    char buf[256];
+    DWORD con = 0;
+    WriteFile(ph_w1, buf, sizeof(buf), &con, NULL);
+    Sleep(100);
+    //memset(buf, '\0', sizeof(buf));
+    ReadFile(ph_r1, buf, 20, &con, NULL);
+    cout<<endl<<"BUF: "<<buf;
+    CloseHandle(ph_r);
+    CloseHandle(ph_w);

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1541162132 source:c:\users\gennady\downloads\win32lab2018\winapilab3\winapi_process\main.cpp
+	<iostream>
+	<windows.h>
+	<TlHelp32.h>
+	<stdio.h>
+
